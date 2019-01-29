@@ -6,23 +6,39 @@ const Header = styled.header`
   font-size: 3em;
 `;
 
+
+
+const MapAndArrowsContainerCenterPeice = styled.div`
+  width: 38em
+  height: 50em;
+  background: pink;
+`;
+
+
+const MapAndArrowsContainer = styled.div`
+  height: 50em;
+  width: 50em;
+  background: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+
 const Square = styled.div`
   width: 12em;
   height: 12em;
-  background: grey;
 `;
 
-const WallSquare = styled.div`
+const WallSquare = styled(Square)`
   width: 12em;
   height: 12em;
   background: grey;
 `;
 
-const PathSquare = styled.div`
-  width: 12em;
-  height: 12em;
+const PathSquare =styled(Square)`
   background: #604700;
-`;
+`
 
 const Image = styled.img`
   width: 12em;
@@ -37,6 +53,40 @@ const MapBox = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-evenly;
+  margin: auto;
+`;
+
+
+
+
+
+const Arrow = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 4em solid transparent;
+  border-right: 4em solid transparent;
+  border-bottom: 4em solid black;
+
+`;
+
+const DownArrow = styled(Arrow)`
+  transform: rotate(180deg);
+  float: below;
+  margin: 1em auto 1em auto;
+`
+
+const LeftArrow = styled(Arrow)`
+  transform: rotate(-90deg);
+  right: 0em;
+
+`
+const RightArrow = styled(Arrow)`
+  transform: rotate(90deg);
+`
+
+const UpArrow = styled(Arrow)`
+  float: above;
+  margin: 1em auto 1em auto;
 `;
 
 
@@ -50,16 +100,24 @@ class App extends Component {
     squares[4] = <PathSquare key = "center" > <Image alt="character" src={chickenFlying}/></PathSquare>
     return (
       <div className="App">
-        <link rel="icon" type="image/svg" href="./logo.svg" sizes="16x16" />
-        <Header className="App-header">
+      <Header className="App-header">
           Hello! This is an exploration game!
         </Header>
         {/* <img src ={ require('./logo.svg') } /> */}
         <p>(There's not much to explore).</p>
-        <MapBox>
-        {squares}
-        </MapBox>
+        <MapAndArrowsContainer>
+          <LeftArrow/>
+       <MapAndArrowsContainerCenterPeice>
+          <UpArrow/>
+          <MapBox>
+          {squares}
+          </MapBox>
+          <DownArrow/>
+        </MapAndArrowsContainerCenterPeice>
+        <RightArrow/>
+        </MapAndArrowsContainer>
       </div>
+
     );
   }
 }
